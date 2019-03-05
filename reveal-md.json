@@ -1,0 +1,11 @@
+{
+  "controls": true,
+  "progress": true,
+  "preprocessor": "reveal-config.js",
+  "theme": "night",
+  "watch": true,
+  "revealOptions": {
+    "transition": "fade"
+  },
+  "disable-auto-open": true
+}

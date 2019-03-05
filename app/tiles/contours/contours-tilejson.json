@@ -1,0 +1,1 @@
+{"name":"contours","scheme":"tms","tiles":["http://127.0.0.1/contours/{z}/{x}/{y}.mvt"],"vector_layers":[{"id":"contours","minzoom":0}],"bounds":[-82.62031211,39.57469003,-82.54519079,39.60775778],"minzoom":0}

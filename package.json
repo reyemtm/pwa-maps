@@ -1,0 +1,34 @@
+{
+  "name": "pwa-maps",
+  "version": "0.1.0",
+  "description": "A Progressive Web App Web Map",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "reveal": "node node_modules/reveal-md/bin/reveal-md.js README.md",
+    "deploy": "netlify deploy --prod"
+  },
+  "keywords": [
+    "progressive web app",
+    "maps",
+    "mapbox",
+    "openmaptiles",
+    "vector tiles",
+    "getbounds"
+  ],
+  "author": "Malcolm Meyer",
+  "license": "MIT",
+  "dependencies": {
+    "sw-precache": "^5.2.1"
+  },
+  "devDependencies": {
+    "reveal-md": "^3.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reyemtm/pwa-maps.git"
+  },
+  "bugs": {
+    "url": "https://github.com/reyemtm/pwa-maps/issues"
+  },
+  "homepage": "https://github.com/reyemtm/pwa-maps#readme"
+}
