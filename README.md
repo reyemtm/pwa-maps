@@ -1,3 +1,33 @@
+# [Progressive Web App]()
+# [Progressive Web Map]()
+
+## Multi-Platform
+* Android
+* Chromebooks
+* iOS
+* Windows Store
+
+## manifest.json
+```
+{
+  "name": "Clear Creek Trail Map",
+  "short_name": "CC Maps",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [...],
+  "background_color": "#d8e8c8",
+  "theme_color": "#d8e8c8",
+  "display": "standalone"
+}
+
+```
+
+## service-worker.js
+* Cache Control via JavaScript
+* Created using Node JS (or manually)
+
+## How 
+
 ## Creating the Basemap
 
 ## OpenMapTiles
