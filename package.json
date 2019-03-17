@@ -4,7 +4,7 @@
   "description": "A Progressive Web App Web Map",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "reveal": "node node_modules/reveal-md/bin/reveal-md.js README.md",
+    "serve": "node node_modules/reveal-md/bin/reveal-md.js README.md",
     "deploy": "netlify deploy --prod"
   },
   "keywords": [
