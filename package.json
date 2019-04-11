@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "description": "A Progressive Web App Web Map",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "reveal": "node node_modules/reveal-md/bin/reveal-md.js README.md",
-    "deploy": "netlify deploy --prod"
+    "present": "node node_modules/reveal-md/bin/reveal-md.js README.md",
+    "start": "node node_modules/sw-precache/cli.js --root=public && http-server -p 80",
+    "deploy": "netlify deploy --prod",
+    "cache": "node node_modules/sw-precache/cli.js --root=public"
   },
   "keywords": [
     "progressive web app",
@@ -18,6 +19,7 @@
   "author": "Malcolm Meyer",
   "license": "MIT",
   "dependencies": {
+    "http-server": "^0.11.1",
     "sw-precache": "^5.2.1"
   },
   "devDependencies": {

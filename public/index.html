@@ -165,6 +165,9 @@
         addGeoJSONSource(map, "parks.geojson", "/geojson/");
         addGeoJSONSource(map, "cc-trails.geojson", "/geojson/");
 
+        /**
+        * Check Source 
+        */
         map.addSource('contoursSource', {
           type: "vector",
           "tiles": ["https://pwa-trails.netlify.com/tiles/contours/{z}/{x}/{y}.mvt"],
