@@ -1,25 +1,24 @@
-<!DOCTYPE html>
+const fs = require('fs-extra')
+
+var pwa = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#d8e8c8" />
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="msapplication-starturl" content="/">
+
   <title>My First PWA Map</title>
   <!--register the service worker-->
   <script>
-    if (
-      window.location.protocol === "http:" &&
-      window.location.origin != "http://127.0.0.1"
-    ) {
-      location.href = location.href.replace("http://", "https://");
-    }
-  </script>
-  <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
-        .register('/pwa-sw-sample.js')
+        .register('/service-worker.js')
         .then(function () {
           console.log("Service Worker Registered");
         });
@@ -96,4 +95,38 @@
   
   </script>
 </body>
-</html>
+</html>`
+
+fs.copy('./dist/geojson/gz_2010_us_040_00_20m.json', './public/geojson/states.geojson')
+.catch(function(err) {
+  console.log(err)
+});
+
+fs.copy('./dist/bright-local.json', './public/bright.json')
+.catch(function(err) {
+  console.log(err)
+});
+
+fs.copy('./node_modules/mapbox-gl/dist/mapbox-gl.css', './public/mapboxgl.css')
+.then(function() {
+  console.log('copied mapbox.css')
+})
+
+.catch(function(err) {
+  console.log(err)
+});
+
+fs.copy('./node_modules/mapbox-gl/dist/mapbox-gl.js', './public/mapboxgl.js')
+.then(function() {
+  console.log('copied mapbox.js')
+  if (!fs.existsSync('./public/index.html') || process.argv[2] === "force") {
+    fs.writeFile('./public/index.html', pwa);
+    console.log('copied index.html')
+    }else{
+      console.log('PWA index.html already exists, will not overwrite!')
+    }
+})
+
+.catch(function(err) {
+  console.log(err)
+});

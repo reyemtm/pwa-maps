@@ -1,0 +1,21 @@
+{
+  "short_name": "CC Maps",
+  "name": "Clear Creek Trail Map",
+  "icons": [
+    {
+      "src": "/img/trails192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/img/trails512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "background_color": "#d8e8c8",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#d8e8c8"
+}

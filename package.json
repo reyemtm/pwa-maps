@@ -4,25 +4,30 @@
   "description": "A Progressive Web App Web Map",
   "scripts": {
     "present": "node node_modules/reveal-md/bin/reveal-md.js README.md",
-    "start": "node node_modules/sw-precache/cli.js --root=public && http-server -p 80",
+    "build": "node pwa-build",
+    "copy": "node pwa-clone-basemap",
+    "start": "http-server -p 80",
     "deploy": "netlify deploy --prod",
-    "cache": "node node_modules/sw-precache/cli.js --root=public"
+    "cache": "node node_modules/sw-precache/cli.js --root=public",
+    "purge": "node pwa-purge"
   },
   "keywords": [
     "progressive web app",
     "maps",
     "mapbox",
     "openmaptiles",
-    "vector tiles",
-    "getbounds"
+    "vector tiles"
   ],
   "author": "Malcolm Meyer",
   "license": "MIT",
   "dependencies": {
+    "fs-extra": "^7.0.1",
     "http-server": "^0.11.1",
+    "mapbox-gl": "^0.53.1",
     "sw-precache": "^5.2.1"
   },
   "devDependencies": {
+    "delete": "^1.1.0",
     "reveal-md": "^3.0.1"
   },
   "repository": {

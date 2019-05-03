@@ -41,13 +41,13 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "tiles": ["http://127.0.0.1/tiles/{z}/{x}/{y}.pbf"],
+      "tiles": ["https://pwa-trails.netlify.com/tiles/{z}/{x}/{y}.pbf"],
       "attribution": "<a href='http://openmaptiles.org/' target='_blank'>© OpenMapTiles</a> | <a href='https://www.getbounds.com'>Malcolm Meyer</a>",
       "maxzoom": 14
     }
   },
-  "sprite": "http://127.0.0.1/sprites/sprite",
-  "glyphs": "http://127.0.0.1/fonts/{fontstack}/{range}.pbf",
+  "sprite": "https://pwa-trails.netlify.com/sprites/sprite",
+  "glyphs": "https://pwa-trails.netlify.com/fonts/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "background",
