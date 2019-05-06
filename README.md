@@ -1,19 +1,29 @@
-## [Progressive <br>Web ~~Apps~~ Maps (PWA)]()
+## Progressive <br>Web ~~Apps~~ Maps (PWA)
 
 Malcolm Meyer
 
 GIS Specialist | 
 [City of Zanesville](https://gis.coz.org)
 
-## [Goals](#2)
+## Introductions
+
+Your GIS origin story in two minutes or less...
+
+## Goals
+<ul style="none;">
+<h4><img src="presentation/checkbox-blank.svg" >Quick Overview of PWAs</h4>
+<h4><img src="presentation/checkbox-blank.svg" >Create a Basic Web Map</h4>
+<h4><img src="presentation/checkbox-blank.svg" >Turn this Map into a PWA</h4>
+<h4><img src="presentation/checkbox-blank.svg" >Make the PWA Installable</h4>
+<h4><img src="presentation/checkbox-blank.svg" >Allow the PWA to be used Offline</h4>
+<h4><img src="presentation/checkbox-blank.svg" >Host & Install the PWA</h4>
+</ul>
+
+## Time Allowing
 
 <ul style="none;">
-<h4><img src="presentation/checkbox-blank.svg" style="margin: -6px 10px;">Overview of PWAs</h4>
-<h4><img src="presentation/checkbox-blank.svg" style="margin: -6px 10px;">Create a Basic Web Map</h4>
-<h4><img src="presentation/checkbox-blank.svg" style="margin: -6px 10px;">Turn this Map into a PWA</h4>
-<h4><img src="presentation/checkbox-blank.svg" style="margin: -6px 10px;">Make the PWA Installable</h4>
-<h4><img src="presentation/checkbox-blank.svg" style="margin: -6px 10px;">Allow the PWA to be used Offline</h4>
-<h4><img src="presentation/checkbox-blank.svg" style="margin: -6px 10px;">Host & Install the PWA</h4>
+<h4><img src="presentation/checkbox-blank.svg" >Add a Vector Tiles Basemap</h4>
+<h4><img src="presentation/checkbox-blank.svg" >Add Overlay Layers</h4>
 </ul>
 
 ## What is a PWA
@@ -39,9 +49,22 @@ iOS
 
 Windows Store
 
-## Examples
+---
 
 <iframe src="https://www.pwastats.com" width="100%" height="500px"></iframe>
+
+## Why a PWA Map?
+
+* Cached Assets for Landing Pages & Map UI
+* Offline Maps for Field Use - No App Required
+* User Convenience - App Drawer/Homescreen
+
+Notes: Let's look at how my sample PWA app looks and take a look at the install process
+
+## Example PWA Map
+[https://pwa-trails.netlify.com](https://pwa-trails.netlify.com)
+
+<iframe src="https://pwa-trails.netlify.com" width="100%" height="400px"></iframe>
 
 ---
 
@@ -66,16 +89,19 @@ Windows Store
 ---
 ![](presentation/pwa-example.jpg)
 
-## <span style="color:skyblue;">Code Break</span>
+## Code Break
 
 Notes: https://www.smashingmagazine.com/2016/02/making-a-service-worker/
 
-## <span style="color:skyblue;">Step 1. Install</span>
+## Step 1. Install
 
-```
-/**
-Download the pwa-maps repo zip file at
+```javascript
+/*
 https://github.com/reyemtm/pwa-maps/archive/master.zip
+*/
+```
+```javascript
+/*
 unzip and open the folder with VS Code
 CTRL + '`' to open the terminal
 */
@@ -96,35 +122,36 @@ npm start
 
 Notes: Installs some dependencies and copies a basic webmap to the public folder
 
-## <span style="color:skyblue;">Step 2. Test</span>
+---
 
 ![](presentation/sample-app-1.png)
 
 
 Note: We have a basic webmap, but the manifest.json and service worker fail to load, however some tests in the Audit PWA test will pass
 
-## [Goals](#2)
+## Goals
 
 <ul style="none;">
-<h4><img src="presentation/check.svg" style="margin: -6px 10px;">Overview of PWAs</h4>
-<h4><img src="presentation/check.svg" style="margin: -6px 10px;">Create a Basic Web Map</h4>
-<h4><img src="presentation/checkbox-blank.svg" style="margin: -6px 10px;">Turn this Map into a PWA</h4>
-<h4><img src="presentation/checkbox-blank.svg" style="margin: -6px 10px;">Make the PWA Installable</h4>
-<h4><img src="presentation/checkbox-blank.svg" style="margin: -6px 10px;">Allow the PWA to be used Offline</h4>
-<h4><img src="presentation/checkbox-blank.svg" style="margin: -6px 10px;">Host & Install the PWA</h4>
+<h4><img src="presentation/check.svg" >Quick Overview of PWAs</h4>
+<h4><img src="presentation/check.svg" >Create a Basic Web Map</h4>
+<h4><img src="presentation/checkbox-blank.svg" >Turn this Map into a PWA</h4>
+<h4><img src="presentation/checkbox-blank.svg" >Make the PWA Installable</h4>
+<h4><img src="presentation/checkbox-blank.svg" >Allow the PWA to be used Offline</h4>
+<h4><img src="presentation/checkbox-blank.svg" >Host & Install the PWA</h4>
 </ul>
+
+## Step 2. Test
+```javascript
+//CTRL + SHIFT + i then Audit Tab
+```
+
+* Progressive Web App Audit in Chrome
+* Check 'Offline' in the Applcation Tab
 
 ## <span style="color:firebrick;">Errors!!</span>
 
-```
-CTRL + SHIFT + i then Audit Tab
-```
-
-Progressive Web App Audit in Chrome
 * No manifest
 * No service worker
-
-Check 'Offline' in the Applcation Tab
 * App does not work offline
 
 ## Let's Look at the Elements of a PWA
@@ -133,9 +160,9 @@ Check 'Offline' in the Applcation Tab
 - *Mobile First Design
 - *Progressive Enhancement
 
-## Adding the manifest.json
-```
-https://app-manifest.firebaseapp.com/
+## manifest.json
+```javascript
+/* https://app-manifest.firebaseapp.com/ */
 ```
 
 ```
@@ -158,19 +185,21 @@ https://app-manifest.firebaseapp.com/
 
 ```
 
-## <span style="color:skyblue;">Test Again</span>
+## Test Again
 
 * Passes manifest tests
 * No service-worker
 * No offline support
 
-## Let's add the<br>service-worker
-* Created manually or with build tools
+## Service workers
+> ...intercept and handle network requests, including programmatically managing a cache of responses.
 
 ## service-worker.js
 
-```
-create an empty service-worker.js file in the root of 'public'
+```javascript
+/* 
+create an empty sw.js file in the root of 'public'
+*/
 ```
 
 ```
@@ -178,7 +207,7 @@ create an empty service-worker.js file in the root of 'public'
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-      .register('/service-worker.js')
+      .register('/sw.js')
       .then(function () {
         console.log("Service Worker Registered");
       });
@@ -188,7 +217,7 @@ create an empty service-worker.js file in the root of 'public'
 
 ## <span style="color:#28a745;">Success!</span>
 * Installable
-* PWA Optimized
+* PWA optimized
 * Still no offline support
 * No service worker caching
 
@@ -196,67 +225,89 @@ create an empty service-worker.js file in the root of 'public'
 
 [https://css-tricks.com/serviceworker-for-offline/](https://css-tricks.com/serviceworker-for-offline/)
 
-## get a basic map working
-## turn this map into a PWA
-## you can use any map API, we will be using Mapbox
-## anyone have custom data?
-## create custom basemap data
-## need to add our map style (basemap)
-## copy fonts, vector tiles and style
-## test our map is working
-## test pwa with application tab
-## need to create manifest json
-## test manifest json with application tab
-## write basic service worker
-## test our app offline
-## use sw-precache
-## test offline again
-## publish app to netlify
+```javascript
+npm run cache 
+```
+```javascript
+/*
+this will simply copy a prepared service
+worker - 'sw.js' to the public folder 
+*/
+```
 
+Notes: take a look at the service worker file and go through the various functions
 
-## Creating the Basemap
+## Service Worker Test
+* Installable
+* PWA optimized
+* Offline support
+* But that's not much of a map...
 
 ## OpenMapTiles
-``https://openmaptiles.com/downloads/tileset/osm/north-america/us/ohio/``
 
-## Create an Extract
-- GeoJSON to clip OpenMapTiles
-- Node JS Package ``mbtiles-extracts``
-- Edit to allow for not passing in a property name
+<h4>Creating an Extract</h4>
+- Download a prepared OpenMapTiles extract
+- Create a GeoJSON to clip the extract
+- Install the Node JS Package ``mbtiles-extracts``
+  - Edit it to allow for not passing in a property name
 - Unpack raw vector tiles from mbtiles
-  - Then use https://www.npmjs.com/package/mbtiles2ungzpbf to extract the tiles from the mbtiles file
+  - https://www.npmjs.com/package/mbtiles2ungzpbf
 
-## Map Data
+Notes: Is anyone familiar with vector tiles? OpenMapTiles provides tools to build custom extracts of OpenStreetMap and pre-built area extracts 
 
-### GeoJSON
-
-- Convert your data to GeoJSON
-- ``Feature to JSON`` or ``esri2open`` or ``mapshaper`` or ``QGIS Save As`` ...
-
-## Build Your Map
-
-- Leaflet, Mapbox, OpenLayers, Esri JS API
-- Depends on your platform, we will use Mapbox Style Spec
-
-## Take it Offline
-- Verify all resources needed for offline use
-- Install Node JS package ``swprecache``
-- Run the precache tool to create your service worker
-- Create your ``manifest.json`` file
-
-## A Basic Webpage
 ```
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document Title</title>
-  <!-- css and js -->
-</head>
-<body>
-  
-</body>
-</html>
+npm run copy
 ```
+```javascript
+/*
+this will copy the OpenMapTiles data, 
+the basemap style and the trails
+GeoJSON data to the public folder
+*/
+```
+## Workbox
+
+```
+npm install workbox-cli /* this is already installed */
+```
+Over 500 files with the vector tile data
+
+All files must be cached for offline support
+
+Use the workbox-cli to automate the creation of the ``sw.js`` file
+
+## Workbox Commands
+
+```
+npm run workbox-wizard
+```
+
+```
+npm run workbox-cache
+```
+
+```
+/*
+you could use the native cli commands if installed globally
+*/
+```
+
+Notes: I just added some simple node scripts to run the workbox-cli without needing to install it globally. Workbox replaces the now deprecated sw-precache tool, also by Google.
+
+## Publish to Netlify
+
+**Delete the ``.netlify`` folder!!**
+```
+npm run deploy
+```
+```
+/* 
+choose the public folder
+*/
+```
+
+## Thanks
+
+<h3>Malcolm Meyer</h3>
+
+malcolm.meyer@coz.org

@@ -18,7 +18,7 @@ var pwa = `<!DOCTYPE html>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
-        .register('/service-worker.js')
+        .register('/sw.js')
         .then(function () {
           console.log("Service Worker Registered");
         });

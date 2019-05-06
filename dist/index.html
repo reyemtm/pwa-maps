@@ -18,11 +18,19 @@
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker
-          .register('/service-worker.js')
+          .register('/sw.js')
           .then(function () {
-            console.log("Service Worker Registered");
+            console.log("Service Worker unRegistered");
           });
       }
+      //       if(window.navigator && navigator.serviceWorker) {
+      //   navigator.serviceWorker.getRegistrations()
+      //   .then(function(registrations) {
+      //     for(let registration of registrations) {
+      //       registration.unregister();
+      //     }
+      //   });
+      // }
     </script>
     <style>
       html,

@@ -2,7 +2,8 @@
   "controls": true,
   "progress": true,
   "preprocessor": "reveal-config.js",
-  "theme": "night",
+  "theme": "stark.css",
+  "highlightTheme": "vs",
   "watch": true,
   "revealOptions": {
     "transition": "fade"
