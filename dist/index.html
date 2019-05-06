@@ -7,7 +7,7 @@
     <script>
       if (
         window.location.protocol === "http:" &&
-        window.location.origin != "http://127.0.0.1"
+        window.location.origin != "http://127.0.0.1:8080"
       ) {
         location.href = location.href.replace("http://", "https://");
       }
@@ -143,16 +143,17 @@
 
       map.on("click", function(e) {
         var features = map.queryRenderedFeatures(e.point);
-        if (features.length) {
+        if (features.length && features[0].source === "cc-trailsSource") {
           var popup = new mapboxgl.Popup().setLngLat(e.lngLat);
           var html = "";
-          for (var i = 0; i < features.length; i++) {
-            html +=
-              features[i].layer.id +
-              "<pre>" +
-              JSON.stringify(features[0].properties, 0, 2) +
-              "</pre>";
-          }
+          // for (var i = 0; i < features.length; i++) {
+          //   html +=
+          //     features[i].layer.id +
+          //     "<pre>" +
+          //     JSON.stringify(features[0].properties, 0, 2) +
+          //     "</pre>";
+          // }
+          html += "<h2>" + features[0].properties.Name + "</h2>"
           popup.setHTML(html);
           popup.addTo(map);
         }
@@ -253,7 +254,7 @@
           source: "cc-trailsSource",
           paint: {
             "line-color": "white",
-            "line-width": 3
+            "line-width": 6
           }
         });
 

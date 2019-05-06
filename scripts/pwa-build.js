@@ -39,7 +39,7 @@ var pwa = `<!DOCTYPE html>
     bottom: 0;
     width: 100%;
     animation: fadeIn 0.5s ease-in-out;
-    background: #333;
+    background: whitesmoke;
   }
   @keyframes fadeIn {
     0% {opacity: 0;}

@@ -4,18 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#d8e8c8" />
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="msapplication-starturl" content="/">
+
   <title>My First PWA Map</title>
   <!--register the service worker-->
-  <script>
-    if (
-      window.location.protocol === "http:" &&
-      window.location.origin != "http://127.0.0.1"
-    ) {
-      location.href = location.href.replace("http://", "https://");
-    }
-  </script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
@@ -40,7 +37,7 @@
     bottom: 0;
     width: 100%;
     animation: fadeIn 0.5s ease-in-out;
-    background: #333;
+    background: whitesmoke;
   }
   @keyframes fadeIn {
     0% {opacity: 0;}

@@ -1067,7 +1067,7 @@ self.__precacheManifest = [
   },
   {
     "url": "geojson/gz_2010_us_040_00_20m.json",
-    "revision": "b17d5cf2c1d05d88f118ec25cbe45f79"
+    "revision": "8ec14844f3b39324ba4e381a947a53d9"
   },
   {
     "url": "geojson/parks.geojson",
@@ -1091,7 +1091,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "c0160adaeb5a2923612ced198cb5e15e"
+    "revision": "850a2c6f2ba4ed593c9dff5736068c09"
   },
   {
     "url": "js/mapbox-gl.js",

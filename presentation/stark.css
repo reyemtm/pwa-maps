@@ -194,6 +194,7 @@ h1, h6 {
   word-wrap: break-word;
   /* box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3); */
   box-shadow: none;
+  white-space: pre-wrap;
 }
 
 .reveal code {

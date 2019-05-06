@@ -1,8 +1,8 @@
 {
   "controls": true,
   "progress": true,
-  "preprocessor": "reveal-config.js",
-  "theme": "stark.css",
+  "preprocessor": "presentation/reveal-config.js",
+  "theme": "presentation/stark.css",
   "highlightTheme": "vs",
   "watch": true,
   "revealOptions": {
