@@ -1,6 +1,6 @@
 #PWA
 public/
-
+workbox-config.js
 # Logs
 logs
 *.log
