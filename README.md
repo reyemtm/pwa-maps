@@ -271,7 +271,7 @@ this will simply copy a prepared sw.js file to the public folder
 ## Examining the Events
 
 ```
-/* the cache is added after the instal event */
+/* the cache is added after the install event */
 6 self.addEventListener("install", function(event) {
 ```
 ```
