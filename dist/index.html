@@ -1,287 +1,203 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Progressive Web App Test</title>
-    <script>
-      if (
-        window.location.protocol === "http:" &&
-        window.location.origin != "http://127.0.0.1:8080"
-      ) {
-        location.href = location.href.replace("http://", "https://");
-      }
-    </script>
-    <link href="/css/mapbox-gl.css" rel="stylesheet" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#d8e8c8" />
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-          .register('/sw.js')
-          .then(function () {
-            console.log("Service Worker Registered");
-          });
-      }
-      //       if(window.navigator && navigator.serviceWorker) {
-      //   navigator.serviceWorker.getRegistrations()
-      //   .then(function(registrations) {
-      //     for(let registration of registrations) {
-      //       registration.unregister();
-      //     }
-      //   });
-      // }
-    </script>
-    <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Progressive Web Fox dist Test</title>
+  <script>
+    if (
+      window.location.protocol === "http:" &&
+      window.location.origin != "http://127.0.0.1:8080"
+    ) {
+      location.href = location.href.replace("http://", "https://");
+    }
+  </script>
+  <link href="/css/mapbox-gl.css" rel="stylesheet" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#d8e8c8" />
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(function () {
+          console.log("Service Worker Registered");
+        });
+    }
+    //       if(window.navigator && navigator.serviceWorker) {
+    //   navigator.serviceWorker.getRegistrations()
+    //   .then(function(registrations) {
+    //     for(let registration of registrations) {
+    //       registration.unregister();
+    //     }
+    //   });
+    // }
+  </script>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .loading {
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.6);
+      height: 100vh;
+    }
+
+    .loading.loading-lg::after {
+      height: 1.6rem;
+      margin-left: -0.8rem;
+      margin-top: -0.8rem;
+      width: 1.6rem;
+    }
+
+    .loading::after {
+      animation: loading 0.5s infinite linear;
+      border: 0.1rem solid #d8e8c8;
+      border-radius: 50%;
+      border-right-color: transparent;
+      border-top-color: transparent;
+      content: "";
+      display: block;
+      height: 0.8rem;
+      left: 50%;
+      margin-left: -0.4rem;
+      margin-top: -0.4rem;
+      position: absolute;
+      top: 50%;
+      width: 0.8rem;
+      z-index: 1;
+    }
+
+    @keyframes loading {
+      0% {
+        transform: rotate(0deg);
       }
 
-      .loading {
-        z-index: 2;
-        background: rgba(255, 255, 255, 0.6);
-        height: 100vh;
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
       }
 
-      .loading.loading-lg::after {
-        height: 1.6rem;
-        margin-left: -0.8rem;
-        margin-top: -0.8rem;
-        width: 1.6rem;
+      100% {
+        opacity: 1;
       }
+    }
 
-      .loading::after {
-        animation: loading 0.5s infinite linear;
-        border: 0.1rem solid #d8e8c8;
-        border-radius: 50%;
-        border-right-color: transparent;
-        border-top-color: transparent;
-        content: "";
-        display: block;
-        height: 0.8rem;
-        left: 50%;
-        margin-left: -0.4rem;
-        margin-top: -0.4rem;
-        position: absolute;
-        top: 50%;
-        width: 0.8rem;
-        z-index: 1;
-      }
+    .not-visible {
+      visibility: hidden;
+    }
 
-      @keyframes loading {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-      .hidden {
-        display: none;
-      }
+    .mapboxgl-ctrl,
+    .mapboxgl-ctrl.mapboxgl-ctrl-group {
+      border-radius: 2px;
+      border: solid thin lightgray;
+      box-shadow: none;
+    }
+  </style>
+</head>
 
-      #map {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 100%;
-        animation: fadeIn 0.5s ease-in-out;
-      }
+<body>
+  <div id="loading" class="loading loading-lg"></div>
+  <div id="map" class="not-visible"></div>
+  <script src="/js/mapbox-gl.js"></script>
+  <script>
+    /**
+     * Global map object
+     */
+    var map = new mapboxgl.Map({
+      container: "map",
+      hash: true,
+      center: [-125.7489875, 49.7314838],
+      zoom: 9
+    });
 
-      @keyframes fadeIn {
-        0% {opacity: 0;}
-        100% {opacity: 1;}
-      }
+    map.addControl(new mapboxgl.NavigationControl());
 
-      .not-visible {
-        visibility: hidden;
-      }
-      .mapboxgl-ctrl,
-      .mapboxgl-ctrl.mapboxgl-ctrl-group {
-        border-radius: 2px;
-        border: solid thin lightgray;
-        box-shadow: none;
-      }
-    </style>
-  </head>
+    map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        },
+        trackUserLocation: true
+      })
+    );
 
-  <body>
-    <div id="loading" class="loading loading-lg"></div>
-    <div id="map" class="not-visible"></div>
-    <script src="/js/mapbox-gl.js"></script>
-    <script>
+    map.on("load", function () {
+      addLayers();
+      document.getElementById('loading').classList.add('hidden');
+      document.getElementById('map').classList.remove('not-visible');
+    });
+
+    map.on("click", function (e) {
+      var features = map.queryRenderedFeatures(e.point);
+      if (features.length && features[0].source === "cc-trailsSource") {
+        var popup = new mapboxgl.Popup().setLngLat(e.lngLat);
+        var html = "";
+        // for (var i = 0; i < features.length; i++) {
+        //   html +=
+        //     features[i].layer.id +
+        //     "<pre>" +
+        //     JSON.stringify(features[0].properties, 0, 2) +
+        //     "</pre>";
+        // }
+        html += "<h2>" + features[0].properties.Name + "</h2>"
+        popup.setHTML(html);
+        popup.addTo(map);
+      }
+    });
+
+    function addGeoJSONSource(m, g, base) {
+      let n = g.split(".");
+      let sanitized = n[0].replace(" ", "");
+      let s = n[0] + "Source";
+      console.log("attempting to add source", s);
+      m.addSource(s, {
+        type: "geojson",
+        data: base + g
+      });
+    }
+
+    function addLayers() {
+      // addGeoJSONSource(map, "parks.geojson", "/geojson/");
+      // addGeoJSONSource(map, "cc-trails.geojson", "/geojson/");
+
       /**
-       * Global map object
+       * Check Source 
        */
-      var map = new mapboxgl.Map({
-        container: "map",
-        style: "bright.json",
-        hash: true,
-        center: [-82.58844, 39.5933],
-        zoom: 13
-      });
+      map.addSource('world_topoSource', {
+        type: "raster",
+        "tiles": ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"],
+        "maxzoom": 16
+      })
 
-      map.addControl(new mapboxgl.NavigationControl());
+      // map.addLayer({
+      //   id: "world_topo",
+      //   type: "raster",
+      //   source: "world_topoSource",
+      // }, "topo");
+    }
+  </script>
+</body>
 
-      map.addControl(
-        new mapboxgl.GeolocateControl({
-          positionOptions: {
-            enableHighAccuracy: true
-          },
-          trackUserLocation: true
-        })
-      );
-
-      map.on("load", function() {
-        addLayers();
-        document.getElementById('loading').classList.add('hidden');
-        document.getElementById('map').classList.remove('not-visible');
-      });
-
-      map.on("click", function(e) {
-        var features = map.queryRenderedFeatures(e.point);
-        if (features.length && features[0].source === "cc-trailsSource") {
-          var popup = new mapboxgl.Popup().setLngLat(e.lngLat);
-          var html = "";
-          // for (var i = 0; i < features.length; i++) {
-          //   html +=
-          //     features[i].layer.id +
-          //     "<pre>" +
-          //     JSON.stringify(features[0].properties, 0, 2) +
-          //     "</pre>";
-          // }
-          html += "<h2>" + features[0].properties.Name + "</h2>"
-          popup.setHTML(html);
-          popup.addTo(map);
-        }
-      });
-
-      function addGeoJSONSource(m, g, base) {
-        let n = g.split(".");
-        let sanitized = n[0].replace(" ", "");
-        let s = n[0] + "Source";
-        console.log("attempting to add source", s);
-        m.addSource(s, {
-          type: "geojson",
-          data: base + g
-        });
-      }
-
-      function addLayers() {
-        addGeoJSONSource(map, "parks.geojson", "/geojson/");
-        addGeoJSONSource(map, "cc-trails.geojson", "/geojson/");
-
-        /**
-        * Check Source 
-        */
-        map.addSource('contoursSource', {
-          type: "vector",
-          "tiles": ["https://pwa-trails.netlify.com/tiles/contours/{z}/{x}/{y}.mvt"],
-          "maxzoom": 14
-        })
-
-        map.addLayer(
-          {
-            id: "parksFillLayer",
-            type: "fill",
-            source: "parksSource",
-            paint: {
-              "fill-color": "#d8e8c8",
-              "fill-opacity": {
-                base: 1.8,
-                stops: [[9, 0.7], [12, 0.4]]
-              }
-            }
-          },
-          "tunnel-minor"
-        );
-
-        map.addLayer(
-          {
-            id: "parksOutlineLayer",
-            type: "line",
-            source: "parksSource",
-            paint: {
-              "line-color": {
-                base: 1,
-                stops: [
-                  [6, "hsla(96, 40%, 49%, 0.46)"],
-                  [8, "hsla(96, 40%, 49%, 0.86)"]
-                ]
-              },
-              "line-dasharray": [3, 3]
-            }
-          },
-          "tunnel-minor"
-        );
-
-        map.addLayer({
-          id: "contoursLayer",
-          type: "line",
-          source: "contoursSource",
-          "source-layer": "contours",
-          "minzoom": 13,
-          paint: {
-            "line-color": "BurlyWood",
-            "line-width": 1,
-            "line-opacity": {
-              stops: [
-                [13, 0.2],
-                [16, 0.8]
-              ]
-            }
-          }
-        }, "tunnel-minor");
-
-        var trailColors = {
-          "Cemetery Ridge Trail": "purple",
-          "Chestnut Trail": "peru",
-          "Creekside Meadows Trail": "maroon",
-          "Fern Trail": "darkgreen",
-          "Good Prairie Trail": "crimson",
-          "Hemlock Trail": "DEEPPINK",
-          "Lake Trail": "INDIGO",
-          "Prairie Warbler Trail": "LIGHTSEAGREEN",
-          "Tulip Tree Trail": "orange"
-        }
-
-        map.addLayer({
-          id: "trailsInnerLayer",
-          type: "line",
-          source: "cc-trailsSource",
-          paint: {
-            "line-color": "white",
-            "line-width": 6
-          }
-        });
-
-        map.addLayer({
-          id: "trailsOuterLayer",
-          type: "line",
-          source: "cc-trailsSource",
-          paint: {
-            "line-color": [
-              "match",
-              ["get", "Name"],
-              "Cemetery Ridge Trail", "purple",
-              "Chestnut Trail", "peru",
-              "Creekside Meadows Trail", "maroon",
-              "Fern Trail", "darkgreen",
-              "Good Prairie Trail", "crimson",
-              "Hemlock Trail", "DEEPPINK",
-              "Lake Trail", "INDIGO",
-              "Prairie Warbler Trail", "LIGHTSEAGREEN",
-              "Tulip Tree Trail", "orange",
-              "lightgray"
-            ],
-            "line-dasharray": [3, 1],
-            "line-width": 3
-          }
-        });
-      }
-    </script>
-  </body>
 </html>
