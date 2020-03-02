@@ -127,6 +127,7 @@
      */
     var map = new mapboxgl.Map({
       container: "map",
+      style: "bright.json",
       hash: true,
       center: [-125.7489875, 49.7314838],
       zoom: 9
@@ -191,11 +192,11 @@
         "maxzoom": 16
       })
 
-      // map.addLayer({
-      //   id: "world_topo",
-      //   type: "raster",
-      //   source: "world_topoSource",
-      // }, "topo");
+      map.addLayer({
+        id: "world_topo",
+        type: "raster",
+        source: "world_topoSource",
+      });
     }
   </script>
 </body>
