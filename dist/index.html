@@ -186,17 +186,30 @@
       /**
        * Check Source 
        */
+
       map.addSource('world_topoSource', {
         type: "raster",
         "tiles": ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"],
         "maxzoom": 16
       })
-
       map.addLayer({
         id: "world_topo",
         type: "raster",
         source: "world_topoSource",
       });
+
+      map.addSource('digital-roads', {
+        type: 'vector',
+        url: 'https://openmaps.gov.bc.ca/geo/pub/WHSE_BASEMAPPING.DRA_DGTL_ROAD_ATLAS_MPAR_SP/ows?service=WMS&request=GetMap'
+      });
+      map.addLayer({
+        'id': 'digital-roads-layer',
+        'type': 'line',
+        'scheme': 'tms',
+        'source': 'digital-roads',
+        'source-layer': 'pub:WHSE_BASEMAPPING.DRA_DGTL_ROAD_ATLAS_MPAR_SP',
+      });
+
     }
   </script>
 </body>
