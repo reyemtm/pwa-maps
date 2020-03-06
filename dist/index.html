@@ -123,7 +123,9 @@
   <div id="map" class="not-visible"></div>
   <script src="/js/mapbox-gl.js"></script>
   <script src="/js/mapbox-gl-draw.js"></script>
+  <script src="/js/pouchdb-7.1.1.min.js"></script>
   <script>
+    var db = new PouchDB('mapathon');
     /**
      * Global map object
      */
