@@ -155,19 +155,24 @@
       addLayers();
       document.getElementById('loading').classList.add('hidden');
       document.getElementById('map').classList.remove('not-visible');
+      map.on('draw.create', saveFeature);
+      map.on('draw.delete', saveFeature);
+      map.on('draw.update', saveFeature);
     });
 
         
-    map.on('draw.create', saveFeature);
-    map.on('draw.delete', saveFeature);
-    map.on('draw.update', saveFeature);
+
 
     function saveFeature(e) {
       var data = draw.getAll();
       console.log(data)
       if (data.features.length > 0) {
         console.log("found some features")
-        var featuresJSON = JSON.stringify({"feature":data.features[0], "datasetId": "test"})
+        for (i=0; i < data.features.length > 0; i++) {
+          var featureId = `${new Date().toJSON()}_${i}_myfeature`;
+          var featuresJSON = JSON.stringify({feature: data.features[i], _id: featureId})
+          db.put(featuresJSON)
+        }
         console.log(featuresJSON);
       } else {
         console.log("no features")
