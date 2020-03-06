@@ -122,10 +122,12 @@
   <div id="loading" class="loading loading-lg"></div>
   <div id="map" class="not-visible"></div>
   <script src="/js/mapbox-gl.js"></script>
-  <script src="/js/mapbox-gl-draw.js"></script>
+  <!-- <script src="/js/mapbox-gl-draw.js"></script>-->
+  <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
   <script src="/js/pouchdb-7.1.1.min.js"></script>
   <script>
     var db = new PouchDB('mapathon');
+    var remoteDB = new PouchDB('https://3da723f0-0cdb-4a18-9014-29dbc59ce2e5-bluemix.cloudant.com/mapathon');
     /**
      * Global map object
      */
@@ -170,7 +172,7 @@
         console.log("found some features")
         for (i=0; i < data.features.length > 0; i++) {
           var featureId = `${new Date().toJSON()}_${i}_myfeature`;
-          var featuresJSON = JSON.stringify({feature: data.features[i], _id: featureId})
+          var featuresJSON = {feature: data.features[i], _id: featureId}
           db.put(featuresJSON)
         }
         console.log(featuresJSON);
@@ -179,6 +181,18 @@
       if (e.type !== 'draw.delete')
         alert('Use the draw tools to draw a polygon!');
       }
+      
+      db.sync(remoteDB, function(err, response) {
+        if (err) {
+            return console.log("Couldn't sync: ", err);
+        } else {
+            console.log("Sync successful: ", response);
+        }
+      }).then(
+        console.log("Synced")
+      ).catch(function(e) {
+        console.log("Couldn't connect: ", e)
+      })
     }
 
     map.on("click", function (e) {
@@ -241,6 +255,7 @@
       // });
 
     }
+
   </script>
 </body>
 
