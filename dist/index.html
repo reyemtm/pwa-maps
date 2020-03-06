@@ -14,6 +14,7 @@
     }
   </script>
   <link href="/css/mapbox-gl.css" rel="stylesheet" />
+  <link href="/css/mapbox-gl-draw.css" rel="stylesheet" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#d8e8c8" />
   <script>
@@ -121,6 +122,7 @@
   <div id="loading" class="loading loading-lg"></div>
   <div id="map" class="not-visible"></div>
   <script src="/js/mapbox-gl.js"></script>
+  <script src="/js/mapbox-gl-draw.js"></script>
   <script>
     /**
      * Global map object
@@ -130,8 +132,11 @@
       style: "bright.json",
       hash: true,
       center: [-125.7489875, 49.7314838],
-      zoom: 9
+      zoom: 10
     });
+
+    var draw = new MapboxDraw();
+    map.addControl(draw, 'top-left');
 
     map.addControl(new mapboxgl.NavigationControl());
 
@@ -150,22 +155,34 @@
       document.getElementById('map').classList.remove('not-visible');
     });
 
+        
+    map.on('draw.create', saveFeature);
+    map.on('draw.delete', saveFeature);
+    map.on('draw.update', saveFeature);
+
+    function saveFeature(e) {
+      var data = draw.getAll();
+      console.log(data)
+      if (data.features.length > 0) {
+        console.log("found some features")
+        var featuresJSON = JSON.stringify({"feature":data.features[0], "datasetId": "test"})
+        console.log(featuresJSON);
+      } else {
+        console.log("no features")
+      if (e.type !== 'draw.delete')
+        alert('Use the draw tools to draw a polygon!');
+      }
+    }
+
     map.on("click", function (e) {
       var features = map.queryRenderedFeatures(e.point);
-      if (features.length && features[0].source === "cc-trailsSource") {
-        var popup = new mapboxgl.Popup().setLngLat(e.lngLat);
-        var html = "";
-        // for (var i = 0; i < features.length; i++) {
-        //   html +=
-        //     features[i].layer.id +
-        //     "<pre>" +
-        //     JSON.stringify(features[0].properties, 0, 2) +
-        //     "</pre>";
-        // }
-        html += "<h2>" + features[0].properties.Name + "</h2>"
-        popup.setHTML(html);
-        popup.addTo(map);
-      }
+      // if (features.length && features[0].source === "cc-trailsSource") {
+      //   var popup = new mapboxgl.Popup().setLngLat(e.lngLat);
+      //   var html = "";
+      //   html += "<h2>" + features[0].properties.Name + "</h2>"
+      //   popup.setHTML(html);
+      //   popup.addTo(map);
+      // }
     });
 
     function addGeoJSONSource(m, g, base) {
@@ -180,8 +197,6 @@
     }
 
     function addLayers() {
-      // addGeoJSONSource(map, "parks.geojson", "/geojson/");
-      // addGeoJSONSource(map, "cc-trails.geojson", "/geojson/");
 
       /**
        * Check Source 
@@ -198,17 +213,25 @@
         source: "world_topoSource",
       });
 
-      map.addSource('digital-roads', {
-        type: 'vector',
-        url: 'https://openmaps.gov.bc.ca/geo/pub/WHSE_BASEMAPPING.DRA_DGTL_ROAD_ATLAS_MPAR_SP/ows?service=WMS&request=GetMap'
-      });
-      map.addLayer({
-        'id': 'digital-roads-layer',
-        'type': 'line',
-        'scheme': 'tms',
-        'source': 'digital-roads',
-        'source-layer': 'pub:WHSE_BASEMAPPING.DRA_DGTL_ROAD_ATLAS_MPAR_SP',
-      });
+      // map.addSource('digital-roads', {
+      //   type: 'vector',
+      //   url: 'https://openmaps.gov.bc.ca/geo/pub/WHSE_BASEMAPPING.DRA_DGTL_ROAD_ATLAS_MPAR_SP/ows?service=WMS&request=GetMap'
+      // });
+      // map.addLayer({
+      //   'id': 'digital-roads-layer',
+      //   'type': 'line',
+      //   'scheme': 'tms',
+      //   'source': 'digital-roads',
+      //   'source-layer': 'WHSE_BASEMAPPING.DRA_DGTL_ROAD_ATLAS_MPAR_SP',
+      //   'layout': {
+      //     'line-join': 'round',
+      //     'line-cap': 'round'
+      //   },
+      //   'paint': {
+      //     'line-color': '#ff69b4',
+      //     'line-width': 1
+      //   }
+      // });
 
     }
   </script>
