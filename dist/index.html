@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Progressive Web App Test</title>
-    <script>
+    <!-- <script>
       if (
         window.location.protocol === "http:" &&
         window.location.origin != "http://127.0.0.1:8080"
       ) {
         location.href = location.href.replace("http://", "https://");
       }
-    </script>
+    </script> -->
     <link href="/css/mapbox-gl.css" rel="stylesheet" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#d8e8c8" />
@@ -179,7 +179,7 @@
         */
         map.addSource('contoursSource', {
           type: "vector",
-          "tiles": ["https://pwa-trails.netlify.com/tiles/contours/{z}/{x}/{y}.mvt"],
+          "tiles": ["https://pwa-trails.netlify.app/tiles/contours/{z}/{x}/{y}.mvt"],
           "maxzoom": 14
         })
 
@@ -281,6 +281,18 @@
             "line-width": 3
           }
         });
+
+        map.addLayer({
+          "id": "highlight",
+          "type": "line",
+          "source": "cc-trailsSource",
+          "paint": {
+            "line-color": "firebrick",
+            "line-width": 6
+          },
+          "filter": ["in", "Name", ""]
+        });
+
       }
     </script>
   </body>

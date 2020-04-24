@@ -31,7 +31,7 @@ self.__precacheManifest = [
   },
   {
     "url": "bright.json",
-    "revision": "5e9946ecaab23f209f78e46c68d1afcc"
+    "revision": "78f99facbddb0adcde51b9cbcffbe7c3"
   },
   {
     "url": "css/mapbox-gl.css",
@@ -1067,7 +1067,7 @@ self.__precacheManifest = [
   },
   {
     "url": "geojson/gz_2010_us_040_00_20m.json",
-    "revision": "8ec14844f3b39324ba4e381a947a53d9"
+    "revision": "b17d5cf2c1d05d88f118ec25cbe45f79"
   },
   {
     "url": "geojson/parks.geojson",
@@ -1091,7 +1091,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "462bae3f447c1b275656fac32e21cce6"
+    "revision": "47a42a7d7da7fed3f3ed5770af082551"
   },
   {
     "url": "js/mapbox-gl.js",
