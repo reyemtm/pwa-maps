@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "delete": "^1.1.0",
-    "reveal-md": "^3.0.1"
+    "reveal-md": "^5.4.0"
   },
   "repository": {
     "type": "git",
